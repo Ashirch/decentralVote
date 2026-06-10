@@ -1,0 +1,54 @@
+<div fxLayout="column" class="main-container">
+    <div fxFlex fxLayout="row" style="padding: 35px;">
+        <div *ngIf="!showElections" style="position: absolute;float: right;"><p-button icon="fa-solid fa-arrow-left"
+                styleClass="p-button-rounded p-button-outlined" (onClick)="showElections = true; alreadyVoted = false"></p-button></div>
+        <div *ngIf="showElections" fxFlex style="display: flex;justify-content: center;"><span
+                style="font-size: xx-large;font-weight: 600;">Elections List</span></div>
+        <div *ngIf="!showElections" fxFlex style="display: flex;justify-content: center;"><span
+                style="font-size: xx-large;font-weight: 600;">Parties List</span></div>
+        <div *ngIf="currentUser.is_admin === false"><p-button
+                icon="fa-solid fa-right-from-bracket" styleClass="p-button-rounded p-button-outlined"
+                (onClick)="logout()"></p-button></div>
+    </div>
+    <div class="card-container" *ngIf="showElections">
+        <div class="card" *ngFor="let election of allElections">
+            <p-card [style]="{ width: '360px' }">
+                <ng-template pTemplate="header">
+                    <div style="padding: 15px;background: #3b82f6;color: white;">Election: {{getElection(election)}}
+                    </div>
+                </ng-template>
+                <div fxLayout="column" fxLayoutGap="5px">
+                    <div fxFlex style="font-weight: 600; color: black;">Election Date: <span
+                            style="color: #3b82f6;">{{getElectionDate(election)}}</span></div>
+                    <div fxFlex style="font-weight: 600; color: black;">Election Status: <span
+                            style="color: #3b82f6;">{{getElectionStatus(election)}}</span></div>
+                    <div fxFlex style="font-weight: 600; color: black;">Total Parties: <span
+                            style="color: #3b82f6;">{{getTotalParties(election)}}</span></div>
+                    <p-divider></p-divider>
+                    <p-button [disabled]="checkElections(election)" (onClick)="showElectionParties(election)"
+                        label="Show Parties" styleClass="p-button-raised w-full"></p-button>
+                </div>
+            </p-card>
+        </div>
+    </div>
+    <div class="card-container" *ngIf="!showElections">
+        <div class="card" *ngFor="let party of allParties">
+            <p-card [style]="{ width: '360px' }">
+                <ng-template pTemplate="header">
+                    <img alt="Card" [src]="getURL(party)" />
+                    <div style="padding: 15px;background: #3b82f6;color: white;">Party: {{getPartyName(party)}}</div>
+                </ng-template>
+                <div fxLayout="column" fxLayoutGap="5px">
+                    <div fxFlex style="font-weight: 600; color: black;">Candidate Name: <span
+                            style="color: #3b82f6;">{{getCandidateName(party)}}</span></div>
+                    <div fxFlex style="font-weight: 600; color: black;">Total Votes: <span
+                        style="color: #3b82f6;">{{getTotalVotes(party)}}</span></div>
+                <p-divider></p-divider>
+                    <p-button label="Vote Now" [disabled]="alreadyVoted" (onClick)="castVote(party)" styleClass="p-button-raised w-full"></p-button>
+                    <span *ngIf="checkVoted(party)" style="text-align: center;">You already Voted</span>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>

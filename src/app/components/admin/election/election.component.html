@@ -1,0 +1,59 @@
+<div class="h100 simple-background" fxLayout="row">
+    <div style="padding: 10px;" fxFlex fxLayout="column"  fxLayoutGap="5px">
+        <div>
+            <p-card>
+                <ng-Template>
+                    <div fxLayout="row" fxLayoutGap="5px">
+                        <span class="p-float-label w-full">
+                            <input class="w-full" pInputText id="party_name" />
+                            <label htmlFor="party_name">Constituency Name</label>
+                        </span>
+                        <span class="p-float-label w-full">
+                            <p-calendar class="w-full" placeholder="MM/DD/YYYY" inputId="dob" [showIcon]="true"></p-calendar>
+                            <label htmlFor="party_status">Date</label>
+                        </span>
+                        <p-button [style]="{'width': 'max-content'}" label="Apply Filters" styleClass="p-button-raised"></p-button>
+                        <p-button [style]="{'width': 'max-content'}" (onClick)="visibleDialog = !visibleDialog" label="Add New Election" icon="pi pi-plus"></p-button>
+                    </div>
+                </ng-Template>
+            </p-card>
+        </div>
+        <div fxFlex="90%">
+            <p-card [style]="{'height': '100%'}">
+                <ng-Template>
+                    <div>
+                        <p-table [value]="allElections" [tableStyle]="{ 'min-width': '50rem' }">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Election Name</th>
+                                    <th>Constituency</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-election>
+                                <tr>
+                                    <td>{{ election.name }}</td>
+                                    <td>{{ election?.constituency_id?.name }}</td>
+                                    <td>{{ getElectionDate(election.election_date) }}</td>
+                                    <td>{{ getStatus(election.election_started,election.election_ended) }}</td>
+                                    <td>
+                                        <p-button (onClick)="editElection(election)" icon="fa-solid fa-pen-to-square"
+                                            styleClass="p-button-rounded p-button-text"></p-button>
+                                        <p-button (onClick)="deleteElection(election._id)" icon="fa-solid fa-trash-can"
+                                            styleClass="p-button-rounded p-button-text" />
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </ng-Template>
+            </p-card>
+        </div>
+    </div>
+</div>
+<p-dialog header="Create New Election"  [modal]="true"  [(visible)]="visibleDialog" [style]="{ width: '50vw' }" (onHide)="editData = null">
+    <app-add-election *ngIf="visibleDialog" [editData]="editData" (electionAdded)="electionAdded($event)"></app-add-election>
+</p-dialog>
+<p-toast position="bottom-right" key="br"></p-toast>

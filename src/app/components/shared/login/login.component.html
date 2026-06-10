@@ -1,0 +1,39 @@
+<div class="h100 gradient-background" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+    <p-card fxFlex="40%;" fxFlex.xs="100%">
+        <ng-template pTemplate="header">
+            <img src="assets/icons/logo.png">
+        </ng-template>
+        <ng-template pTemplate="p-card-content">
+            <div class="flex flex-column gap-4">
+                <div class="flex align-items-center justify-content-center">
+                    <!-- <div class="flex flex-column gap-2 w-full">
+                        <label htmlFor="email">Email</label>
+                        <input class="w-full" pInputText id="email" aria-describedby="email-help" [(ngModel)]="email" />
+                    </div> -->
+                    <span class="p-float-label w-full">
+                        <input class="w-full" pInputText id="email" [(ngModel)]="email" required/>
+                        <label htmlFor="email">Email</label>
+                    </span>
+                </div>
+                <div class="flex align-items-center justify-content-center">
+                    <span class="p-float-label w-full">
+                        <p-password class="w-full" [(ngModel)]="password" [toggleMask]="true" [feedback]="false"></p-password>
+                        <label for="password">Password</label>
+                    </span>
+                </div>
+                <div class="flex flex-row" style="place-content: space-between;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <p-checkbox [(ngModel)]="rememberMe" [binary]="true" value="Remember Me" inputId="rememberMe"></p-checkbox>
+                        <label for="rememberMe">Remember Me</label>
+                    </div>
+                    <div class="flex align-items-center justify-content-center">
+                        <p-button label="Forget Password?" styleClass="p-button-link"></p-button>
+                    </div>
+                </div>
+                <p-button label="Login" styleClass="p-button-raised half-width" (onClick)="navigateToDashboard()"></p-button>
+                <p-button label="You don't have Account?" styleClass="p-button-link" (onClick)="navigateToSignUp()"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>

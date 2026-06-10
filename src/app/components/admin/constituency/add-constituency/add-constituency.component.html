@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutGap="5px">
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <span class="w-full">
+            <label htmlFor="constituency_name">Constituency Name</label>
+            <input class="w-full" pInputText [(ngModel)]="filter.name" placeholder="Please Enter Constituency" id="constituency_name" required/>
+        </span>
+        <span class="w-full">
+            <label htmlFor="short_code">Short Code</label>
+            <input class="w-full" [(ngModel)]="filter.short_code" placeholder="Please Enter Short Code" pInputText id="short_code" />
+        </span>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <span>Status: </span>
+        <p-inputSwitch [(ngModel)]="filter.is_active"></p-inputSwitch>
+    </div>
+    <div fxFlex [style]="{'text-align': 'center'}">
+        <p-button label="Save Constituency" (onClick)="addNewConstituency()"  styleClass="p-button-raised half-width"></p-button>
+    </div>
+</div>

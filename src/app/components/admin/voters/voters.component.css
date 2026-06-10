@@ -1,0 +1,20 @@
+p-card {
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+:host() ::ng-deep .p-password {
+    width: 100% !important;
+}
+
+:host() ::ng-deep .p-inputtext {
+    width: 100% !important;
+}
+
+.p-inputtext {
+    width: 100% !important;
+}
+
+:host() ::ng-deep .p-card .p-card-content {
+    padding: 0px !important;
+}

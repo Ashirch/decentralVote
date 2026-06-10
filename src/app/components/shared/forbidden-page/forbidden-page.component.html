@@ -1,0 +1,15 @@
+<div class="h100 gradient-background" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+
+    <div class="centered">
+        <div fxLayout="row" fxLayoutAlign="center center" style="color: white;">
+            <h1>403 - Forbidden </h1>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <p style="color: white;"> You are not authorized to view this page.</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <p *ngIf="!currentUser" style="color: white;">Please <a href="">login</a> to view this page.</p>
+        </div>
+    </div>
+</div>

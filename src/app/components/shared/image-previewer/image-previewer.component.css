@@ -1,0 +1,24 @@
+.wound-image-dialog {
+    width: 800px;
+}
+.image-wrapper {
+    position: relative;
+}
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.nav-arrow-left {
+    left: 0;
+}
+.nav-arrow-right {
+    right: 0;
+}
+.image {
+    width: calc(min(80vw, 80vh));
+    height: calc(min(80vw, 80vh));
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

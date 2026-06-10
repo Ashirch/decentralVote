@@ -1,0 +1,39 @@
+<div fxLayout="column" fxLayoutGap="5px">
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex>
+            <span class="w-full">
+                <label htmlFor="election_name">Election Name</label>
+                <input class="w-full" [(ngModel)]="filter.name" pInputText placeholder="Please Enter Election Name" id="election_name" required/>
+            </span>
+        </div>
+        <div fxFlex>
+            <span class="w-full" fxFlex fxLayout="column">
+                <label for="Constituency">Constituency</label>
+                <p-dropdown [options]="allConstituencies" [(ngModel)]="selectedConstituency" placeholder="Select Constituency" optionLabel="name" inputId="Constituency">
+                    <ng-template let-constituency pTemplate="constituency">
+                        <span>{{ constituency.name }}</span>
+                    </ng-template>
+                </p-dropdown>
+            </span>
+        </div>
+    </div>
+    <div fxFlex fxLayout="column">
+        <label for="election_date" class="ml-2">Election Date</label>
+        <p-calendar class="w-full" placeholder="MM/DD/YYYY" [(ngModel)]="filter.election_date"  [inline]="true" [showWeek]="true" inputId="election_date" [showIcon]="true"></p-calendar>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <span fxFlex fxLayout="row" fxLayoutGap="5px">
+            <label htmlFor="start_time">Election Start</label>
+            <p-inputSwitch [(ngModel)]="filter.election_started"></p-inputSwitch>
+            <!-- <input class="w-full" type="time" pInputText [(ngModel)]="filter.start_time"  placeholder="Please Select Start Time" id="start_time" required/> -->
+        </span>
+        <span fxFlex fxLayout="row" fxLayoutGap="5px">
+            <label htmlFor="short_code">Election Ends</label>
+            <p-inputSwitch [(ngModel)]="filter.election_ended"></p-inputSwitch>
+            <!-- <input class="w-full"  type="time" [(ngModel)]="filter.end_time"  pInputText placeholder="Please Select End Time" id="end_time" /> -->
+        </span>
+    </div>
+    <div fxFlex [style]="{'text-align': 'center'}">
+        <p-button label="Save Election" (onClick)="saveElection()" styleClass="p-button-raised half-width"></p-button>
+    </div>
+</div>

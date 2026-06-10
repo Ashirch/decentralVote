@@ -1,0 +1,94 @@
+<div class="h100 gradient-background" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+    <p-card fxFlex="40%;" fxFlex.xs="100%">
+        <ng-template pTemplate="header">
+            <img src="assets/icons/logo.png">
+        </ng-template>
+        <ng-template pTemplate="p-card-content">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full">
+                        <input class="w-full" [(ngModel)]="filter.first_name" pInputText id="first_name" required />
+                        <label htmlFor="first_name">First Name</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full">
+                        <input class="w-full" [(ngModel)]="filter.last_name" pInputText id="last_name" required />
+                        <label htmlFor="last_name">Last Name</label>
+                    </span>
+                </div>
+                <div class="field col-12">
+                    <span class="p-float-label w-full top-margin">
+                        <input class="w-full" [(ngModel)]="filter.email" pInputText id="email" required />
+                        <label htmlFor="email">Email</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full top-margin">
+                        <p-password [(ngModel)]="filter.password" [toggleMask]="true" id="password">
+                            <ng-template pTemplate="header">
+                                <h6>Pick a password</h6>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <p-divider></p-divider>
+                                <p class="mt-2">Suggestions</p>
+                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                    <li>At least one lowercase</li>
+                                    <li>At least one uppercase</li>
+                                    <li>At least one numeric</li>
+                                    <li>Minimum 8 characters</li>
+                                </ul>
+                            </ng-template>
+                        </p-password>
+                        <label htmlFor="password">Password</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full top-margin">
+                        <p-password [(ngModel)]="value" [toggleMask]="true" [feedback]="false" id="retype_password"></p-password>
+                        <label htmlFor="retype_password">Retype Password</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full top-margin">
+                        <input class="w-full" [(ngModel)]="filter.reg_no" pInputText id="reg_no" required />
+                        <label htmlFor="reg_no">National Registration No</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label w-full top-margin">
+                        <p-dropdown [options]="allConstituencies" [(ngModel)]="selectedConstituecny" placeholder="Select Constituency" optionLabel="name" inputId="constituency">
+                            <ng-template let-constituency pTemplate="constituency">
+                                <span>{{ constituency.name }}</span>
+                            </ng-template>
+                        </p-dropdown>
+                        <label htmlFor="constituency">Select Constituency</label>
+                    </span>
+                </div>
+                <div class="field col-12">
+                    <div fxFlex fxLayout="column" fxLayoutGap="5px">
+                        <!-- <div> -->
+                        <!-- <span class="top-margin"> -->
+                            <label for="docUpload" style="display: flex;">Upload National Document</label>
+                            <input type="file" #docUpload id="docUpload" (change)="handleDocUpload($event)"/>
+                        <!-- </span> -->
+                    </div>
+                    <!-- <span class="p-float-label w-full top-margin">
+                        <input class="w-full" [(ngModel)]="filter.email" pInputText id="email" required />
+                        <label htmlFor="email">Email</label>
+                    </span> -->
+                </div>
+                <div class="field col-12" *ngIf="isEmptyFields">
+                    <span style="color: red;">{{errorMessage}}</span>
+                </div>
+                <div class="field col-12 top-margin">
+                    <p-button label="Register" (onClick)="register()" styleClass="p-button-raised half-width"></p-button>
+                </div>
+                <div class="field col-12">
+                    <p-button label="Already have Account?" styleClass="p-button-link" (onClick)="navigateToLogin()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>

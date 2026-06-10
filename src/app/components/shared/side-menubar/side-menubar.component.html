@@ -1,0 +1,10 @@
+<div *ngIf="expandedMenu" class="main-background">
+    <p-button *ngIf="expandedMenu" (onClick)="initializeMenu(true)" icon="pi pi-chevron-left" styleClass="p-button-rounded p-button-text p-button-raised toggle-button"></p-button>
+    <img style="max-width: 295px; padding: 22px;" src="assets/icons/logowhite.png" />
+    <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+</div>
+<div *ngIf="!expandedMenu" class="main-background-2">
+    <img style="max-width: 70px;padding: 8px;margin-top: 15px;" src="assets/icons/logo-white-small.png" />
+    <p-button *ngIf="!expandedMenu" (onClick)="initializeMenu(true)" icon="pi pi-chevron-right" styleClass="p-button-rounded p-button-text p-button-raised toggle-button-2"></p-button>
+    <p-panelMenu [model]="items" [style]="{'width':'70px'}"></p-panelMenu>
+</div>

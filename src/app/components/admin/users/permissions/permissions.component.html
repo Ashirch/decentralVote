@@ -1,0 +1,42 @@
+<div class="h100 simple-background" fxLayout="row">
+    <div style="padding: 10px;" fxFlex fxLayout="column"  fxLayoutGap="5px">
+        <div>
+            <p-card>
+                <ng-Template>
+                    <div fxLayout="row" fxLayoutGap="5px">
+                        <span class="p-float-label w-full">
+                            <input class="w-full" pInputText id="party_name" />
+                            <label htmlFor="party_name">Role Name</label>
+                        </span>
+                        <p-button [style]="{'width': 'max-content'}" label="Apply Filters" styleClass="p-button-raised"></p-button>
+                        <p-button [style]="{'width': 'max-content'}" label="Add New Role" icon="pi pi-plus"></p-button>
+                    </div>
+                </ng-Template>
+            </p-card>
+        </div>
+        <div fxFlex="90%">
+            <p-card [style]="{'height': '100%'}">
+                <ng-Template>
+                    <div>
+                        <p-table [columns]="cols" [tableStyle]="{ 'min-width': '50rem' }">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let col of columns">
+                                        {{ col.header }}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                <tr>
+                                    <td *ngFor="let col of columns">
+                                        {{ rowData[col.field] }}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </ng-Template>
+            </p-card>
+        </div>
+    </div>
+</div>

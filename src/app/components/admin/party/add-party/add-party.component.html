@@ -1,0 +1,30 @@
+<div fxLayout="column" fxLayoutGap="5px">
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex="25%">
+            <input type="file" #partImgUpload id="partImgUpload" (change)="handleImageUpload($event)"/>
+            <img [src]="selectedSrc" class="profilechoose rounded img-thumbnail" (click)="triggerImageUpload()"/>
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutGap="10px">
+            <span class="w-full">
+                <label htmlFor="party_name">Party Name</label>
+                <input class="w-full" pInputText [(ngModel)]="filter.name" placeholder="Please Enter Party Name" id="party_name" required/>
+            </span>
+            <span class="w-full">
+                <label for="Constituency">Constituency</label>
+                <p-dropdown [options]="allConstituencies" [(ngModel)]="selectedConstituency" placeholder="Select Constituency" optionLabel="name" inputId="Constituency">
+                    <ng-template let-constituency pTemplate="constituency">
+                        <span>{{ constituency.name }}</span>
+                    </ng-template>
+                </p-dropdown>
+            </span>
+            <div fxFlex fxLayout="row" fxLayoutGap="5px">
+                <span>Status: </span>
+                <p-inputSwitch [(ngModel)]="filter.is_active" ></p-inputSwitch>
+            </div>
+        </div>
+    </div>
+    <div fxFlex [style]="{'text-align': 'center'}">
+        <p-button label="Save Party" (onClick)="addNewParty()" styleClass="p-button-raised half-width"></p-button>
+    </div>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>

@@ -1,0 +1,130 @@
+<div fxLayout="column" fxLayoutGap="5px">
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex="25%">
+            <input type="file" #imgUpload id="imgUpload" (change)="handleImageUpload($event)" />
+            <img [src]="selectedSrc" class="profilechoose rounded img-thumbnail" (click)="triggerImageUpload()" />
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutGap="10px">
+            <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                <span class="w-full">
+                    <label htmlFor="first_name">First Name</label>
+                    <input class="w-full" pInputText [(ngModel)]="filter.first_name" placeholder="Please Enter First Name" id="first_name" required />
+                </span>
+                <span class="w-full">
+                    <label htmlFor="last_name">Last Name</label>
+                    <input class="w-full" pInputText [(ngModel)]="filter.last_name" placeholder="Please Enter Last Name" id="last_name" required />
+                </span>
+            </div>
+            <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                <span class="w-full">
+                    <label htmlFor="email">Email</label>
+                    <input class="w-full" pInputText [(ngModel)]="filter.email" placeholder="Please Enter Email" id="email" required />
+                </span>
+                <span class="w-full">
+                    <label htmlFor="mobile">Mobile</label>
+                    <input class="w-full" pInputText [(ngModel)]="filter.mobile_no" placeholder="Please Enter Mobile" id="mobile" required />
+                </span>
+            </div>
+            <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                <div fxFlex="50%" fxLayout="column">
+                    <div>Gender:</div>
+                    <div fxFlex fxLayout="row" fxLayoutGap="15px">
+                        <div class="flex align-items-center">
+                            <p-radioButton name="gender" value="Male" [(ngModel)]="filter.gender"
+                                inputId="male"></p-radioButton>
+                            <label for="male" class="ml-2">Male</label>
+                        </div>
+                        <div class="flex align-items-center">
+                            <p-radioButton name="gender" value="Female" [(ngModel)]="filter.gender"
+                                inputId="female"></p-radioButton>
+                            <label for="female" class="ml-2">Female</label>
+                        </div>
+                        <div class="flex align-items-center">
+                            <p-radioButton name="gender" value="Other" [(ngModel)]="filter.gender"
+                                inputId="other"></p-radioButton>
+                            <label for="other" class="ml-2">Other</label>
+                        </div>
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column">
+                    <label for="dob" class="ml-2">Date of Birth</label>
+                    <p-calendar class="w-full" placeholder="MM/DD/YYYY" [(ngModel)]="filter.date_of_birth"  inputId="dob" [showIcon]="true"></p-calendar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex fxLayout="row" fxLayoutGap="5px">
+            <span class="w-full">
+                <label htmlFor="address_1">Address 1</label>
+                <textarea rows="3" pInputTextarea class="w-full" [(ngModel)]="filter.address_1" placeholder="Please Enter Address 1" id="address_1"
+                    required></textarea>
+            </span>
+            <span class="w-full">
+                <label htmlFor="address_2">Address 2</label>
+                <textarea rows="3" pInputTextarea class="w-full" [(ngModel)]="filter.address_2" placeholder="Please Enter Address 2"
+                    id="address_2"></textarea>
+            </span>
+        </div>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <span class="w-full">
+            <label for="Country">Country</label>
+            <p-dropdown [options]="countryies" placeholder="Select Country" [(ngModel)]="filter.country" inputId="country">
+                <ng-template let-country pTemplate="country">
+                    <span>{{ country }}</span>
+                </ng-template>
+            </p-dropdown>
+        </span>
+        <span class="w-full">
+            <label for="state">State</label>
+            <input class="w-full" pInputText [(ngModel)]="filter.state" placeholder="Please Enter State" id="state" required />
+            <!-- <p-dropdown placeholder="Select State" optionLabel="name" inputId="state"></p-dropdown> -->
+        </span>
+        <span class="w-full">
+            <label for="city">City</label>
+            <input class="w-full" pInputText [(ngModel)]="filter.city" placeholder="Please Enter City" id="city" required />
+            <!-- <p-dropdown placeholder="Select City" optionLabel="name" inputId="city"></p-dropdown> -->
+        </span>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <span class="w-full">
+            <label for="Constituency">Constituency</label>
+            <p-dropdown [options]="allConstituencies" [(ngModel)]="selectedConstituency" (ngModelChange)="handleConstituencyChange()" placeholder="Select Constituency" optionLabel="name" inputId="Constituency">
+                <ng-template let-constituency pTemplate="constituency">
+                    <span>{{ constituency.name }}</span>
+                </ng-template>
+            </p-dropdown>
+        </span>
+        <span class="w-full">
+            <label for="party">Party</label>
+            <p-dropdown [options]="allConstituencyParty" [(ngModel)]="selectedParty" placeholder="Select Party" optionLabel="name" inputId="party">
+                <ng-template let-party pTemplate="party">
+                    <span>{{ party.name }}</span>
+                </ng-template>
+            </p-dropdown>
+        </span>
+        <span class="w-full">
+            <label for="election_type">Election</label>
+            <p-dropdown [options]="allConstituencyElections" [(ngModel)]="selectedElection" placeholder="Select Election" optionLabel="name" inputId="election_type">
+                <ng-template let-election pTemplate="election">
+                    <span>{{ election.name }}</span>
+                </ng-template>
+            </p-dropdown>
+        </span>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex>
+            <span>
+                <label for="docUpload">Upload Document (Only pdf)</label>
+                <input type="file" #docUpload id="docUpload" accept=".pdf" (change)="handleDocUpload($event)"/>
+            </span>
+        </div>
+        <div fxFlex></div>
+        <div fxFlex></div>
+    </div>
+    <div fxFlex [style]="{'text-align': 'center'}">
+        <p-button label="Save Candidate" (onClick)="addNewCandidate()" styleClass="p-button-raised half-width"></p-button>
+    </div>
+</div>
